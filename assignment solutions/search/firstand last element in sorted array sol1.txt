@@ -1,0 +1,42 @@
+#using binary search with extra argument (searchy function is self explanatory)
+
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        
+        #similarly move end to left by -1 till end is greater than target
+        ans = [-1,-1]
+        ans[0]=self.searchy(nums,target,True)
+        ans[1]=self.searchy(nums,target,False)
+        
+        return ans
+        
+        
+    def searchy(self,nums,target,findstart):
+            ans = -1
+            start = 0
+            end = len(nums) - 1
+
+            while(start<=end):
+                #calculate mid from start and end
+                mid = start + (end - start)//2
+
+                if(target<nums[mid]):
+                    end = mid-1
+
+                elif(target>nums[mid]):
+                    start = mid+1
+
+                else:
+                    #potential answer found!
+                    ans = mid
+                    #now move the start and end pointers such that they are at number != target and then break the corresponding loop
+
+                    if (findstart):
+                        end = mid - 1
+                    else:
+                        start = mid +1
+
+
+            return ans
+
+           

@@ -1,0 +1,32 @@
+#elemnts wrap around
+
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        
+        #binary serach code
+        # if element is not found then start will be the answer:
+        
+        start = 0
+        end = len(letters) - 1
+        
+        while(start<=end):
+            
+            mid = start + (end-start)//2
+
+            if (target<letters[mid]):
+                end = mid-1
+            elif (target>=letters[mid]):
+		# CHANGE 1
+		#even if the target is foudn we need to move the pointer as we need greater letter than target
+                start = mid + 1
+            # else:
+		  # we want only greatest letter so this part of binary search is skipped
+            #     # return letters[mid]
+            #     pass
+            
+        if start>=len(letters):
+            return letters[0]
+        else:
+	    #CHANGE 2
+            return letters[start]
+                

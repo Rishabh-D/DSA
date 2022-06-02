@@ -1,0 +1,49 @@
+# find a number greater than or eqaul to target number
+
+# ceiling of a number in asceinding sorted array
+
+arr = [1,3,4,6,7,9,11,23,35,40]
+target = 44
+#apply binary search algorithm
+
+def binary_search(arr, target):
+    #define start and end  index 
+    start = 0
+    end = len(arr) - 1
+    ceil = None
+    
+    while(start<=end):
+        # print("inside while  function")
+        
+        #calculate mid index here at the start of the loop
+        mid = start + (end-start)//2 
+        # print(mid)
+        
+        if (arr[mid]<target):
+            start = mid+1 
+        elif (arr[mid]>target):
+			#this block will always have arr[mid] (current) number greater than target and thus
+			# we are interested in this block of code for ceil(greater or equal) of number
+            if ceil is None:
+				#capture  arr[mid] element if ceil is none
+                ceil = arr[mid]
+            else:
+				# update ceil if it is found greater than new number.
+				# the condition after end is redundant but helps us get clear picture
+				
+                if (arr[mid] < ceil) and (arr[mid] >= target):
+                    ceil = arr[mid]
+            end = mid-1
+        else:
+            #target element is eqaul to mid element (index)
+            return arr[mid]
+    #if code reaches here it means target element was not found
+    if ceil is None:
+        return -1
+    if ceil>target:
+        return ceil
+    else:
+        return -1
+    
+index  = binary_search(arr,target)
+print(index)

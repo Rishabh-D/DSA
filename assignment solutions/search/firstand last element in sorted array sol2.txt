@@ -1,0 +1,45 @@
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        
+        #start with binary search and when element is found then check and move the start to right by +1 till number start is not equal to target
+        #similarly move end to left by -1 till end is greater than target
+        
+        
+        #define start and end
+        start = 0
+        end = len(nums) - 1
+        
+        while(start<=end):
+            #calculate mid from start and end
+            mid = start + (end - start)//2
+            
+            if(target<nums[mid]):
+                end = mid-1
+                
+            elif(target>nums[mid]):
+                start = mid+1
+                
+            else:
+                #potential answer found!
+                
+                #now move the start and end pointers such that they are at number != target and then break the corresponding loop
+                
+                
+                while(nums[start]!=target):
+                    start+=1
+                    if(start>len(nums)):
+                        break
+                    
+            
+                
+                while(nums[end]!=target):
+                    end-=1
+                    if(end<0):
+                        break
+                        
+                
+                return [start,end]
+            
+        return [-1,-1]
+                    
+                
