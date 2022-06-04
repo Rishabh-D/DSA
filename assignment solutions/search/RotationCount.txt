@@ -1,0 +1,55 @@
+# find rotation count in rotates array
+
+# find the index of peak
+# add 1 to it
+
+# def findpeakindex(arr):
+#     start = 0
+#     end = len(arr)-1
+    
+#     while(start<=end):
+        
+#         mid = start + (end-start)//2
+#         print(mid)
+        
+#         if(start==mid):
+#             return start
+#         elif(arr[start]<arr[mid]):
+#             start = mid
+#         elif(arr[start]>arr[mid]):
+#             end = mid-1
+            
+#     return -1
+
+def findpeakindex(arr):
+        start = 0
+        end = len(arr)- 1
+
+        while(start<=end):
+            
+            mid = start+(end-start)//2
+            # print(mid)
+            
+            if(((mid+1)<(len(arr)-1)) and (arr[mid]>arr[mid+1])):
+                return mid
+                
+            if(((mid-1)> -1) and (arr[mid]<arr[mid-1])):
+                return mid-1
+            
+          
+            if(arr[start]<=arr[mid]):
+                start = mid+1
+            elif(arr[start]>arr[mid]):
+                end=mid-1
+                
+        return -1
+    
+    
+arr = [7, 9, 11, 12, 15]
+peakin = findpeakindex(arr)
+
+print((peakin+1)%len(arr))
+
+print()
+
+

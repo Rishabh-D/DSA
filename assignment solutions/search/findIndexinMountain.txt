@@ -1,0 +1,27 @@
+class Solution:
+    def peakIndexInMountainArray(self, arr: List[int]) -> int:
+        
+        
+        # scenario is same as binary search but first we need to find and distinguish the slope of the number(trend)
+        # this we can do by comparing two adjacent elements ( located at mid and mid+1)
+        # if arr[mid] < arr[mid+1]  this implies that we are on a increasing slope (/)
+        # so start = mid+1
+        # if arr[mid] > arr[mid + 1] ,this implies that we are on decsresing track (\)
+        # so end = mid (it is not mid-1 because we are not sure if previous element is greater or less than mid)
+        
+        start = 0
+        end = len(arr)-1
+        
+        while(start<=end):
+            
+            mid = start + (end-start)//2
+            
+            if(start==end):
+                return start
+
+            elif(arr[mid]<arr[mid+1]):
+                start = mid+1
+            elif(arr[mid]>arr[mid+1]):
+                end = mid
+            
+        return None

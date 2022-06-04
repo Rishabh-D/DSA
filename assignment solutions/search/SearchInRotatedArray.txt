@@ -1,0 +1,62 @@
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        
+        #rotated array is different than mountain array
+        
+        # 1.find the pivot in the array (largest number in the array)
+        # 2. find in the first half and then find in the second half if not found in first half
+        
+        
+        peakindex = self.findpeakinrotatedarray(nums)
+        if (peakindex==-1):
+            return self.binarysearch(nums,target,0,len(nums)-1)
+        
+        index1 = self.binarysearch(nums,target,0,peakindex)
+        if index1 != -1:
+            return index1
+        else:
+            index2 = self.binarysearch(nums,target,peakindex+1,len(nums)-1)
+            return index2
+            
+        
+        
+        
+        
+    def binarysearch(self,arr,target,start,end):
+
+        while(start<=end):
+            mid = start+(end-start)//2
+
+            if (arr[mid]==target):
+                return mid
+            elif(target<arr[mid]):
+                end=mid-1
+            elif(target>arr[mid]):
+                start = mid+1
+        return -1
+            
+
+    def findpeakinrotatedarray(self,arr):
+
+        start = 0
+        end = len(arr)- 1
+
+        while(start<=end):
+            mid = start+(end-start)//2
+            
+            if(((mid+1)<(len(arr)-1)) and (arr[mid]>arr[mid+1])):
+                return mid
+                
+            if(((mid-1)> -1) and (arr[mid]<arr[mid-1])):
+                return mid-1
+            
+            
+            if(arr[start]<=arr[mid]):
+                start = mid+1
+            elif(arr[start]>arr[mid]):
+                end=mid-1
+                
+        return -1
+        #this means that array is not rotated
+
+

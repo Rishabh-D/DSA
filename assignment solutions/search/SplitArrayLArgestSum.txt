@@ -1,0 +1,60 @@
+class Solution:
+    def splitArray(self, nums: List[int], m: int) -> int:
+        
+        #start is min and end is max
+        start = 0
+        end = 0
+        for i in range(0,len(nums)):
+            start = max(start,nums[i])
+            end+=nums[i]
+
+        #now do the binary search
+        while(start<end):
+            mid = start+(end-start)//2
+
+            sum=0
+            parts = 1
+            for i in range(0,len(nums)):
+                sum+=nums[i]
+                if(sum>mid):
+                    parts+=1
+                    sum=0
+                    sum=nums[i]
+
+            if(parts>m):
+                start=mid+1
+            elif(parts<=m):
+                #since parts can be equal to m, hence not mid-1
+                #if equal was attached to above condtion then remove the +1
+                end=mid
+
+        return start
+
+        
+    def explanation():
+        '''
+        # find the min and max sum
+        # min sum will be max of the array
+        # max sum will be sum of all the elements
+        
+        # so let us assume that the sum is in the middle (mid = min + (max-min)//2)
+        # idea is that required sum will lie between min and max sum
+        # we will populate each number in an array and find its running sum such that it does not exceed mid
+        #if it exceeds add that number and numbers after that in new partition(array)
+        #keep track of number of partitions you are creating
+        #if at the end (when all numbers are used), check partitions
+        #if no. of partitions>m then reduce the mid value becuase then answer will be between start and mid-1
+        #else answer will be between mid+1 and en
+        
+        '''
+        pass
+    
+    
+    
+   
+    
+        
+        
+        
+        
+        

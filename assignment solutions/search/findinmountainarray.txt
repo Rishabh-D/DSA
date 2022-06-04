@@ -1,0 +1,83 @@
+# """
+# This is MountainArray's API interface.
+# You should not implement it, or speculate about its implementation
+# """
+#class MountainArray:
+#    def get(self, index: int) -> int:
+#    def length(self) -> int:
+
+class Solution:
+    def findInMountainArray(self, target: int, mountain_arr: 'MountainArray') -> int:
+        start = 0
+        end = self.findpeakindex(mountain_arr)
+        
+        
+        # if target is greater than the largest number in the arrray just return -1
+        if (target>mountain_arr.get(end)):
+            return -1
+        
+        index1 = self.searchindex(mountain_arr,target,start, end,True)
+        print(index1,"index1")
+        if index1!=-1:
+            return index1
+        else:
+            index2 = self.searchindex(mountain_arr,target,end, mountain_arr.length()-1,False)
+            print(index2,"index2")
+            if index2 == -1:
+                return -1
+            else:
+                return index2
+            
+        
+        
+        
+        
+        
+
+        
+    def searchindex(self,mountain_arr: 'MountainArray',target,start, end,isascending):
+        while(start<=end):
+                
+                mid = start + (end-start)//2
+                
+                if isascending:
+                
+                    if(mountain_arr.get(mid)==target):
+                        return mid
+                    elif (mountain_arr.get(mid)>target):
+                        end = mid-1
+                    elif (mountain_arr.get(mid)<target):
+                        start = mid+1
+                        
+                else:
+                    if(mountain_arr.get(mid)==target):
+                        return mid
+                    elif (mountain_arr.get(mid)>target):
+                        start = mid+1
+                    elif (mountain_arr.get(mid)<target):
+                        end = mid-1    
+               
+        return -1
+                    
+                    
+                    
+        
+        
+        
+    def findpeakindex(self,mountain_arr: 'MountainArray'):
+        
+        start = 0
+        end  = mountain_arr.length() - 1
+        
+        while(start<end):
+            
+            mid = start + (end-start)//2
+            
+            if(mountain_arr.get(mid)<mountain_arr.get(mid+1)):
+                start = mid+1
+            elif(mountain_arr.get(mid)>mountain_arr.get(mid+1)):
+                end = mid
+            
+        # start or end contains the index of peak element
+        return start
+        
